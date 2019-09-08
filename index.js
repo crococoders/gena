@@ -1,14 +1,14 @@
-const Slimbot = require("slimbot");
-const bot = new Slimbot("TELEGRAM_BOT_TOKEN");
+const bot = require("./bot");
+const { notifyMergedPR, notifyOpenedPR, startBot } = bot;
 
 module.exports = app => {
-  app.on(["pull_request.opened", "issues.opened"], async context => {
-    app.log(context);
-    bot.sendMessage(
-      "user_id",
-      `🆕 pull request by @${context.payload.issue.user.login}`
-    );
+  app.on("pull_request.opened", async context => {
+    notifyOpenedPR(context);
+  });
+
+  app.on("pull_request.merged", async context => {
+    notifyMergedPR(context);
   });
 };
 
-bot.startPolling();
+startBot();
