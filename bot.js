@@ -3,6 +3,10 @@ require("dotenv").config();
 const Slimbot = require("slimbot");
 const bot = new Slimbot(process.env["TOKEN"]);
 
+const reportTeamsForSprint = teams => {};
+
+const reportError = error => {};
+
 const notifyOpenedPR = context => {
   bot.sendMessage(
     "user_id",
@@ -30,6 +34,8 @@ const startBot = () => {
 };
 
 module.exports = {
+  reportTeamsForSprint,
+  reportError,
   notifyMergedPR,
   notifyOpenedPR,
   startBot
