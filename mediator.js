@@ -1,23 +1,25 @@
-import probot from "./index";
-import core from "./core";
-import bot from "./bot";
+const app = require("./index");
+const core = require("./core");
+const bot = require("./bot");
+
+const { getReviewers, shuffleTeamsForSprint } = core;
+const { reportTeamsForSprint, reportError } = bot;
 
 const createPullRequest = async (username, prname) => {
-  const reviewers = await core.getReviewers(username);
+  const reviewers = await getReviewers(username);
   try {
-    await probot.createPullRequest(username, prname);
-    return true;
+    await app.createPullRequest(username, prname);
   } catch (e) {
-    return false;
+    throw e;
   }
 };
 
 const updateTeamsForSprint = async () => {
   try {
-    const teams = await core.shuffleTeamsForSprint();
-    bot.reportTeamsForSprint(teams);
+    const teams = await shuffleTeamsForSprint();
+    reportTeamsForSprint(teams);
   } catch (e) {
-    bot.reportError(e);
+    reportError(e);
   }
 };
 

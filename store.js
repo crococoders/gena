@@ -12,9 +12,9 @@ const fetchTeams = () => {
   ];
 };
 
-const updateFrequency = reviewers => {};
+const updateFrequency = async reviewers => {};
 
-const updateTeams = teams => {};
+const updateTeams = async teams => {};
 
 module.exports = {
   fetchReviewers,

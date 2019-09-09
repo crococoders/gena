@@ -1,4 +1,4 @@
-import store from "./store";
+const store = require("./store");
 
 const { fetchReviewers, updateFrequency } = store;
 
@@ -14,7 +14,7 @@ const getReviewers = async username => {
 
 const shuffleTeamsForSprint = async () => {
   const teams = store.fetchTeams();
-  // tut strategiya
+  // strategy encapsulating shuffling algorithm
   try {
     await store.updateTeams(teams);
     return teams;
