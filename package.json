@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "probot": "^7.2.0",
+    "redis": "^2.8.0",
     "slimbot": "^4.4.0"
   },
   "devDependencies": {

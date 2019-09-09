@@ -1,6 +1,6 @@
 const store = require("./store");
 
-const { fetchReviewers, updateFrequency } = store;
+const { fetchTeams, fetchReviewers, updateFrequency, updateTeams } = store;
 
 const getReviewers = async username => {
   try {
@@ -13,10 +13,14 @@ const getReviewers = async username => {
 };
 
 const shuffleTeamsForSprint = async () => {
-  const teams = store.fetchTeams();
+  try {
+    const teams = await fetchTeams();
+  } catch (e) {
+    throw e;
+  }
   // strategy encapsulating shuffling algorithm
   try {
-    await store.updateTeams(teams);
+    await updateTeams(teams);
     return teams;
   } catch (e) {
     throw e;
